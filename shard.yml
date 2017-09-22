@@ -1,0 +1,18 @@
+
+name: markov
+
+description: |
+  ⛓ Generate Markov Chains and predict the future!
+
+version: 0.1.0
+
+authors:
+  - McCall Alexander <mccallalexander96@gmail.com>
+
+crystal: 0.23.1
+
+targets:
+  markov:
+    main: src/markov.cr
+
+license: MIT
