@@ -2,10 +2,36 @@ require "./spec_helper"
 
 describe Markov::TransitionMatrix do
 
+  it "#initialize" do  
+    t = Markov::TransitionMatrix(Range(Int32, Int32)).new
+    true.should eq true
+  end
+
+  it "#to_json, #from_json" do  
+    t = Markov::TransitionMatrix(String).new
+    t.add "I"
+    t.add "just"
+    t.add "met"
+    t.add "you"
+    j_t = t.to_json
+    t_j = Markov::TransitionMatrix(String).from_json j_t
+    t["I"].should eq t_j["I"]
+  end
+
   it "#add" do
     t = Markov::TransitionMatrix(String).new
+    t.add "hey"
+    t["hey"].should eq 1
+  end
+  
+  it "#probabilities" do
+    t = Markov::TransitionMatrix(String).new
     t.add "hello"
-    t["hello"].should eq 1
+    t.add "welcome"
+    t.add "hello"
+    two_thirds = 2.to_f32 / 3.to_f32
+    t.probabilities["hello"].should eq two_thirds
+    t.probabilities["not included word"].should eq 0.to_f32
   end
 
   it "#sum" do
@@ -15,16 +41,6 @@ describe Markov::TransitionMatrix do
     t.add "hello"
 
     t.sum.should eq(3)
-  end
-
-  it "#probabilities" do
-    t = Markov::TransitionMatrix(String).new
-    t.add "hello"
-    t.add "welcome"
-    t.add "hello"
-    two_thirds = 2.to_f32 / 3.to_f32
-    t.probabilities["hello"].should eq two_thirds
-    t.probabilities["not included word"].should eq 0.to_f32
   end
 
   it "#probable_transition" do 
@@ -67,6 +83,7 @@ describe Markov::TransitionMatrix do
       end
 
     end
+
   end
   
 end

@@ -1,7 +1,10 @@
+require "json"
 require "./TransitionTable.cr"
+
 
 # Module `Markov` contains all the means for creating Markov Chains and running Markov Processes.
 module Markov
+
   
   # A `Chain` is a vehicle for generating probable sequences of type `LinkType`
   class Chain(LinkType)

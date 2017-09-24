@@ -18,7 +18,7 @@ describe Markov::Chain do
 
   describe "getters" do
 
-    describe "#generated" do    
+    describe "#generated" do
 
       it "raises `EmptyTransitionMatrixException` when seed has nothing to transition to" do
         begin

@@ -25,9 +25,9 @@ require "markov"
 
 TODO: Write usage instructions here
 
-## Development
+<!-- ## Development
 
-TODO: Write development instructions here
+TODO: Write development instructions here  -->
 
 ## Contributing
 
