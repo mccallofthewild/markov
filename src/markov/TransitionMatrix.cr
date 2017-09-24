@@ -60,23 +60,46 @@ module Markov
     # Chooses a random, probable transition from the transitions in the matrix.
     # If matrix is empty, will throw `Markov::Exceptions::EmptyTransitionMatrixException`
     def probable_transition : LinkType
-      probable_array = [] of LinkType 
 
+      err = Markov::Exceptions::EmptyTransitionMatrixException.new(
+        method: "probable_transition",
+        message: "No transitions availiable!"
+      )
+
+      if self.size === 0
+        raise err
+      end
+
+      probable = nil
+      
+      success_params = {} of LinkType => Range(Int32, Int32)
+      low : Int32 = 0
+      high : Int32 = 0
+
+      initial_low = low
+      
       self.each do |key, count|
-        i = 0
-        while i < count
-          probable_array.push(key)
-          i = i + 1
+        low = high
+        high = low + count
+        # exclusive range (high not included)
+        success_params[key] = low...high
+      end
+
+
+      final_high = high
+      exclusive_capturing_range = initial_low...final_high
+      random_selection : Int32 = Random.rand(exclusive_capturing_range)
+
+      success_params.each do |key, capturing_range|
+        if capturing_range.includes? random_selection
+          probable = key
         end
       end
 
-      begin
-        return probable_array.sample(1).first
-      rescue IndexError
-        raise Markov::Exceptions::EmptyTransitionMatrixException.new(
-          method: "probable_transition",
-          message: "No transitions availiable!"
-        )
+      if ! probable
+        raise err
+      else
+        return probable
       end
     end
 

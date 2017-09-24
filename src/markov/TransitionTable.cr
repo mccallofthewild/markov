@@ -32,17 +32,17 @@ module Markov
       @last_added_key = key
     end
 
-    # returns probable transition from the `TransitionMatrix` associated with key provided
+    # Returns probable transition from the `TransitionMatrix` associated with key provided
     def probable( after key : LinkType ) : LinkType
       self[key].probable_transition
     end
 
-    # returns random key
+    # Returns random key
     def random_key : LinkType
       self.keys.sample(1).first
     end
 
-    # returns random `TransitionMatrix` from table
+    # Returns random `TransitionMatrix` from table
     def random_matrix : TransitionMatrix(LinkType)
       self[random_key]
     end
