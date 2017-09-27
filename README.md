@@ -7,7 +7,7 @@ A Crystal library for building Markov Chains and running Markov Processes.
 A Markov Chain is essentially a mechanism for guessing probable future events based on a sample of past events.
 For a great explanation, watch [this Khan Academy video](https://www.khanacademy.org/computing/computer-science/informationtheory/moderninfotheory/v/markov_chains).
 
-### Visit the [API Documentation](https://mccallofthewild.github.io/markov) for a more in-depth look at the library's functionality.
+### Visit the [API Documentation](https://mccallofthewild.github.io/markov/) for a more in-depth look at the library's functionality.
 
 ## Installation
 
