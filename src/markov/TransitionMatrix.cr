@@ -9,6 +9,7 @@ module Markov
 
     # { ELEMENT => OCCURRENCE_COUNT }
 
+    # Creates a new empty `TransitionMatrix`.
     def initialize
       super
     end
@@ -61,15 +62,12 @@ module Markov
     # If matrix is empty, will throw `Markov::Exceptions::EmptyTransitionMatrixException`
     def probable_transition : LinkType
 
-      err = Markov::Exceptions::EmptyTransitionMatrixException.new(
-        method: "probable_transition",
-        message: "No transitions availiable!"
-      )
-
-      if self.size === 0
-        raise err
+      if self.size == 0
+        raise Markov::Exceptions::EmptyTransitionMatrixException.new(
+          method: "probable_transition",
+          message: "No transitions availiable!"
+        )
       end
-
       probable = nil
       
       success_params = {} of LinkType => Range(Int32, Int32)
@@ -85,8 +83,8 @@ module Markov
         success_params[key] = low...high
       end
 
-
       final_high = high
+      
       exclusive_capturing_range = initial_low...final_high
       random_selection : Int32 = Random.rand(exclusive_capturing_range)
 
@@ -97,7 +95,10 @@ module Markov
       end
 
       if ! probable
-        raise err
+        raise Markov::Exceptions::EmptyTransitionMatrixException.new(
+          method: "probable_transition",
+          message: "Transition not found!"
+        )
       else
         return probable
       end
