@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mccallofthewild/markov">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/doc.js"></script>
+  <title>README - github.com/mccallofthewild/markov</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li class="current"><a href="index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent " data-id="github.com/mccallofthewild/markov/Markov" data-name="markov">
+      <a href="Markov.html">Markov</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Chain" data-name="markov::chain(linktype)">
+      <a href="Markov/Chain.html">Chain</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mccallofthewild/markov/Markov/Exceptions" data-name="markov::exceptions">
+      <a href="Markov/Exceptions.html">Exceptions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/EmptyTransitionMatrixException" data-name="markov::exceptions::emptytransitionmatrixexception">
+      <a href="Markov/Exceptions/EmptyTransitionMatrixException.html">EmptyTransitionMatrixException</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/EmptyTransitionTableException" data-name="markov::exceptions::emptytransitiontableexception">
+      <a href="Markov/Exceptions/EmptyTransitionTableException.html">EmptyTransitionTableException</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/InvalidSeedException" data-name="markov::exceptions::invalidseedexception">
+      <a href="Markov/Exceptions/InvalidSeedException.html">InvalidSeedException</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/TransitionMatrix" data-name="markov::transitionmatrix(linktype)">
+      <a href="Markov/TransitionMatrix.html">TransitionMatrix</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/TransitionTable" data-name="markov::transitiontable(linktype)">
+      <a href="Markov/TransitionTable.html">TransitionTable</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1>⛓ Markov</h1>
+
+<p>A Crystal library for building Markov Chains and running Markov Processes.</p>
+
+<h3><em>What is a Markov Chain?</em></h3>
+
+<p>A Markov Chain is essentially a mechanism for guessing probable future events based on a sample of past events.
+For a great explanation, watch <a href="https://www.khanacademy.org/computing/computer-science/informationtheory/moderninfotheory/v/markov_chains" target="_blank">this Khan Academy video</a>.</p>
+
+<h3>Visit the <a href="https://mccallofthewild.github.io/markov" target="_blank">API Documentation</a> for a more in-depth look at the library's functionality.</h3>
+
+<h2>Installation</h2>
+
+<p>Add this to your application's <code>shard.yml</code>:</p>
+
+<pre><code class='language-yaml'>dependencies:
+  markov:
+    github: mccallofthewild/markov</code></pre>
+
+<p>In your terminal, install Crystal dependencies with:</p>
+
+<pre><code class='language-bash'>$ shards install</code></pre>
+
+<p>or </p>
+
+<pre><code class='language-bash'>$ crystal deps</code></pre>
+
+<h2>Usage</h2>
+
+<p>Begin by requiring the <code><a href="Markov.html">Markov</a></code> module:</p>
+
+<pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;markov&quot;</span></code></pre>
+
+<h3>Basic -- Hello Markov</h3>
+
+<p>A classic Markov text generator. This example will work well for small (array-sized) data sets.</p>
+
+<p><span class="flag purple">NOTE</span>  <code><a href="Markov/Chain.html">Markov::Chain</a></code> is a generic type which contains, receives and generates elements of <code>LinkType</code>.</p>
+
+<p>We'll start with the sample text:</p>
+
+<pre><code class='language-crystal'>example_string <span class="o">=</span> <span class="s">&quot;how much wood would a woodchuck chuck if a woodchuck could chuck wood&quot;</span></code></pre>
+
+<p>There are several <code><a href="Markov/Chain.html">Markov::Chain</a></code> constructors to choose from. The simplest one takes in a <code>LinkType</code> array of elements as <code>sample</code> and a <code>seed</code> of <code>LinkType</code>. <code>seed</code> is the element in <code>sample</code> you want to start the chain with. If not provided, a random element will be chosen.</p>
+
+<pre><code class='language-crystal'>example_arr <span class="o">=</span> example_string.split(<span class="s">&quot; &quot;</span>) <span class="c">#&#61;&gt; &#91;&quot;how&quot;,&quot;much&quot;,&quot;wood&quot;,&quot;would&quot;,&quot;a&quot;,&quot;woodchuck&quot;,&quot;chuck&quot;,&quot;if&quot;,&quot;a&quot;,&quot;woodchuck&quot;,&quot;could&quot;,&quot;chuck&quot;,&quot;wood&quot;&#93;</span>
+seed <span class="o">=</span> example_arr[<span class="n">0</span>] <span class="c">#&#61;&gt; &quot;how&quot;</span>
+
+example_chain <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">Chain</span>(<span class="t">String</span>).<span class="k">new</span> sample: example_arr, seed: seed</code></pre>
+
+<p>Finally, we'll generate a probable sequence of elements with the <code>Markov::Chain#generate</code> method:</p>
+
+<pre><code class='language-crystal'>puts example_chain.generate(<span class="n">10</span>)</code></pre>
+
+<p>Output:</p>
+
+<pre><code class='language-bash'>["much", "wood", "would", "a", "woodchuck", "could", "chuck", "if", "a", "woodchuck"]</code></pre>
+
+<p>That's it! </p>
+
+<p>If we wanted to get the elements one at a time, we could use the <code>Markov::Chain#next</code> method instead:</p>
+
+<pre><code class='language-crystal'>puts example_chain.<span class="k">next</span> <span class="c">#&#61;&gt; &quot;much&quot;</span>
+puts example_chain.<span class="k">next</span> <span class="c">#&#61;&gt; &quot;wood&quot;</span>
+puts example_chain.<span class="k">next</span> <span class="c">#&#61;&gt; &quot;would&quot;</span></code></pre>
+
+<h3>Advanced </h3>
+
+<p>This implementation was built for larger data sets, with asynchronous input in mind.</p>
+
+<p>In this example, we will create a <code><a href="Markov/Chain.html">Markov::Chain</a></code> which can generate realistic movie titles.</p>
+
+<p>To begin, we instantiate a <code><a href="Markov/TransitionTable.html">Markov::TransitionTable</a></code>. A <code>TransitionTable</code> is a mechanism for training and implementing Markov processes.</p>
+
+<pre><code class='language-crystal'>example_table <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">TransitionTable</span>(<span class="t">String</span>).<span class="k">new</span></code></pre>
+
+<h4><code>Markov::TransitionTable#add</code></h4>
+
+<p>Now we'll add a movie title using the <code>Markov::TransitionTable#add</code> method:</p>
+
+<pre><code class='language-crystal'>movie_one <span class="o">=</span> <span class="s">%w(the great gatsby)</span> <span class="c"># shortcut syntax for &#91;&quot;the&quot;,&quot;great&quot;,&quot;gatsby&quot;&#93;</span>
+
+movie_one.each <span class="k">do</span> <span class="o">|</span>word<span class="o">|</span>
+  example_table.add(word)
+<span class="k">end</span></code></pre>
+
+<p><code>Markov::TransitionTable#add</code> adds elements one at a time. At a deeper level, it's adding each new word to the previous word's <a href="https://en.wikipedia.org/wiki/Stochastic_matrix" target="_blank">Transition Matrix</a> (<code><a href="Markov/TransitionMatrix.html">Markov::TransitionMatrix</a></code>).</p>
+
+<h4><code>Markov::TransitionTable#fill</code></h4>
+
+<p>For syntactic sugar, if we have an array of elements, we can avoid looping through and <code>#add</code>-ing them by using the <code>Markov::TransitionTable#fill</code> method instead:</p>
+
+<pre><code class='language-crystal'>movie_one <span class="o">=</span> <span class="s">%w(the great gatsby)</span> <span class="c"># shortcut syntax for &#91;&quot;the&quot;,&quot;great&quot;,&quot;gatsby&quot;&#93;</span>
+
+example_table.fill table_with: movie_one</code></pre>
+
+<h4><code>Markov::TransitionTable#reset</code></h4>
+
+<p>A problem arises at this point:</p>
+
+<pre><code class='language-crystal'>movie_two <span class="o">=</span> <span class="s">%w(great expectations)</span>
+example_table.fill table_with: movie_two</code></pre>
+
+<p>The above code sequentially adds each word to the <code>TransitionTable</code>. But <em>The Great Gatsby</em> and <em>Great Expectations</em> are two separate movie titles; the "Great" at the beginning of <em>Great Expectations</em> is not a probable transition from the "Gatsby" at the end of <em>The Great Gatsby</em>.</p>
+
+<p>To solve this, use <code>Markov::TransitionTable#reset</code>. <code>#reset</code> clears the <code>TransitionTable</code>'s last added key, allowing us to separate titles like so:</p>
+
+<pre><code class='language-crystal'>movie_one <span class="o">=</span> <span class="s">%w(the great gatsby)</span>
+example_table.fill table_with: movie_one
+
+example_table.reset
+movie_two <span class="o">=</span> <span class="s">%w(great expectations)</span>
+example_table.fill table_with: movie_two
+
+example_table.reset
+movie_three <span class="o">=</span> <span class="s">%w(the great escape)</span>
+example_table.fill table_with: movie_three</code></pre>
+
+<h4>Implementing the <code>TransitionTable</code> with a <code><a href="Markov/Chain.html">Markov::Chain</a></code></h4>
+
+<p>Finally, we can put the <code>TransitionTable</code> to use by passing it to a <code><a href="Markov/Chain.html">Markov::Chain</a></code> constructor as <code>transition_table</code>:</p>
+
+<pre><code class='language-crystal'>example_chain <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">Chain</span>(<span class="t">String</span>).<span class="k">new</span> transition_table: example_table, seed: <span class="s">&quot;great&quot;</span></code></pre>
+
+<h4>Handling Dead Ends</h4>
+
+<p>With small and/or unique data sets, Markov chains are fallible to reaching dead ends. That is, they can often reach a point where there is nothing to transition to.</p>
+
+<p>When this happens in the <code><a href="Markov.html">Markov</a></code> module, <code><a href="Markov/Exceptions.html">Markov::Exceptions</a>::EmptyTransitionMatrixException</code> is raised.</p>
+
+<p>For example:</p>
+
+<pre><code class='language-crystal'>dead_end_array <span class="o">=</span> <span class="s">%w(some say the world will end in fire)</span>
+dead_end_chain <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">Chain</span>(<span class="t">String</span>).<span class="k">new</span> sample: dead_end_array, seed: <span class="s">&quot;fire&quot;</span>
+<span class="c"># nothing comes after &quot;fire&quot;, so the chain is at a dead end.</span>
+dead_end_chain.<span class="k">next</span> <span class="c"># raises &#96;EmptyTransitionMatrixException&#96;</span></code></pre>
+
+<p>To prevent this, use the <code>Markov::Chain#on_dead_end</code> exception handler. </p>
+
+<p>This method takes in a callback block with arguments of: the <code><a href="Markov/Chain.html">Markov::Chain</a></code>'s <code>@transition_table</code>, the <code><a href="Markov/Chain.html">Markov::Chain</a></code> instance, and the <code>EmptyTransitionMatrixException</code> raised.</p>
+
+<p>The block's return value of <code>LinkType</code> fills in as the next item in the chain.</p>
+
+<pre><code class='language-crystal'>dead_end_array <span class="o">=</span> <span class="s">%w(some say the world will end in fire)</span>
+dead_end_chain <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">Chain</span>(<span class="t">String</span>).<span class="k">new</span> sample: dead_end_array, seed: <span class="s">&quot;fire&quot;</span>
+
+dead_end_chain.on_dead_end <span class="k">do</span> <span class="o">|</span>transition_table, chain, exception<span class="o">|</span>
+  <span class="s">&quot;some&quot;</span>
+<span class="k">end</span>
+
+dead_end_chain.<span class="k">next</span> <span class="c">#&#61;&gt; &quot;some&quot;</span>
+dead_end_chain.<span class="k">next</span> <span class="c">#&#61;&gt; &quot;say&quot;</span>
+dead_end_chain.<span class="k">next</span> <span class="c">#&#61;&gt; &quot;the&quot;</span></code></pre>
+
+<h2>Contributing</h2>
+
+<ol><li>Fork it ( https://github.com/mccallofthewild/markov/fork )</li><li>Create your feature branch (git checkout -b my-new-feature)</li><li>Commit your changes (git commit -am 'Add some feature')</li><li>Push to the branch (git push origin my-new-feature)</li><li>Create a new Pull Request</li></ol>
+
+<h2>Contributors</h2>
+
+<ul><li><a href="https://github.com/mccallofthewild" target="_blank">McCall Alexander</a> mccallofthewild - creator, maintainer</li></ul>
+</div>
+</body>
+</html>

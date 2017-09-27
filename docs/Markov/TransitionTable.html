@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mccallofthewild/markov">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Markov::TransitionTable(LinkType) - github.com/mccallofthewild/markov</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/mccallofthewild/markov/Markov" data-name="markov">
+      <a href="../Markov.html">Markov</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Chain" data-name="markov::chain(linktype)">
+      <a href="../Markov/Chain.html">Chain</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mccallofthewild/markov/Markov/Exceptions" data-name="markov::exceptions">
+      <a href="../Markov/Exceptions.html">Exceptions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/EmptyTransitionMatrixException" data-name="markov::exceptions::emptytransitionmatrixexception">
+      <a href="../Markov/Exceptions/EmptyTransitionMatrixException.html">EmptyTransitionMatrixException</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/EmptyTransitionTableException" data-name="markov::exceptions::emptytransitiontableexception">
+      <a href="../Markov/Exceptions/EmptyTransitionTableException.html">EmptyTransitionTableException</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/InvalidSeedException" data-name="markov::exceptions::invalidseedexception">
+      <a href="../Markov/Exceptions/InvalidSeedException.html">InvalidSeedException</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/TransitionMatrix" data-name="markov::transitionmatrix(linktype)">
+      <a href="../Markov/TransitionMatrix.html">TransitionMatrix</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/mccallofthewild/markov/Markov/TransitionTable" data-name="markov::transitiontable(linktype)">
+      <a href="../Markov/TransitionTable.html">TransitionTable</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Markov::TransitionTable(LinkType)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Markov/TransitionTable.html">Markov::TransitionTable(LinkType)</a></li><li class="superclass">Hash(LinkType, <a href="../Markov/TransitionMatrix.html">Markov::TransitionMatrix(LinkType)</a>)</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>A <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code> represents a mapping of keys to <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code>'s.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L6" target="_blank">markov/TransitionTable.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+          <div class="summary"><p>Makes it possible to use <code>#to_json</code> and <code>#from_json</code> (see Crystal docs)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+          <div class="summary"><p>Creates a new empty <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#add%28key%3ALinkType%29-instance-method" class="signature"><strong>#add</strong>(key : LinkType)</a>
+        
+          <div class="summary"><p>Inserts <code>key</code> into last added <code>key</code>'s <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code>, if applicable,  and creates new <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> for <code>key</code> if not already there.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fill%28table_withsample%3AArray%28LinkType%29%29-instance-method" class="signature"><strong>#fill</strong>(table_with sample : Array(LinkType))</a>
+        
+          <div class="summary"><p>Sequentially fills <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code> with values in given <code>Array</code> using <code><a href="../Markov/TransitionTable.html#add%28key%3ALinkType%29-instance-method">#add</a></code> method.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#probable%28afterkey%3ALinkType%29%3ALinkType-instance-method" class="signature"><strong>#probable</strong>(after key : LinkType) : LinkType</a>
+        
+          <div class="summary"><p>Returns probable transition from the <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> associated with key provided.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#probable%3F%28afterkey%3ALinkType%29%3ALinkType%3F-instance-method" class="signature"><strong>#probable?</strong>(after key : LinkType) : LinkType?</a>
+        
+          <div class="summary"><p>Returns probable transition from the <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> associated with key provided.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#random_key%3ALinkType-instance-method" class="signature"><strong>#random_key</strong> : LinkType</a>
+        
+          <div class="summary"><p>Returns random key.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#random_matrix%3AMarkov%3A%3ATransitionMatrix%28LinkType%29-instance-method" class="signature"><strong>#random_matrix</strong> : Markov::TransitionMatrix(LinkType)</a>
+        
+          <div class="summary"><p>Returns random <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> from table.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#reset-instance-method" class="signature"><strong>#reset</strong></a>
+        
+          <div class="summary"><p>Resets the <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code>'s last added key between non-sequential sets of training data.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new&#40;pull:JSON::PullParser&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Makes it possible to use <code>#to_json</code> and <code>#from_json</code> (see Crystal docs)</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Creates a new empty <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="add&#40;key:LinkType&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>add</strong>(key : LinkType)
+
+        <a class="method-permalink" href="#add%28key%3ALinkType%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Inserts <code>key</code> into last added <code>key</code>'s <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code>, if applicable, 
+and creates new <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> for <code>key</code> if not already there.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fill&#40;table_withsample:Array&#40;LinkType&#41;&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>fill</strong>(table_with sample : Array(LinkType))
+
+        <a class="method-permalink" href="#fill%28table_withsample%3AArray%28LinkType%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sequentially fills <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code> with values in given <code>Array</code> using <code><a href="../Markov/TransitionTable.html#add%28key%3ALinkType%29-instance-method">#add</a></code> method.
+Just a shortcut for looping through array and <code><a href="../Markov/TransitionTable.html#add%28key%3ALinkType%29-instance-method">#add</a></code>ing elements.</p>
+
+<pre><code>string_array <span class="o">=</span> <span class="s">%w(some say the world will end in fire)</span>
+tt <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">TransitionTable</span>(<span class="t">String</span>).<span class="k">new</span>
+tt.fill table_with: string_array</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="probable&#40;afterkey:LinkType&#41;:LinkType-instance-method">
+      <div class="signature">
+        
+        def <strong>probable</strong>(after key : LinkType) : LinkType
+
+        <a class="method-permalink" href="#probable%28afterkey%3ALinkType%29%3ALinkType-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns probable transition from the <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> associated with key provided.
+Will raise <code>EmptyTransitionMatrixException</code> if no probable transition is available.</p>
+
+<pre><code>string_array <span class="o">=</span> <span class="s">%w(some say the world will end in fire)</span>
+tt <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">TransitionTable</span>(<span class="t">String</span>).<span class="k">new</span>
+tt.fill table_with: string_array
+
+tt.probable? after: <span class="s">&quot;world&quot;</span> <span class="c">#&#61;&gt; &quot;will&quot;</span>
+tt.probable? after: <span class="s">&quot;fire&quot;</span> <span class="c"># raises &#96;EmptyTransitionMatrixException&#96;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L69" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="probable?&#40;afterkey:LinkType&#41;:LinkType?-instance-method">
+      <div class="signature">
+        
+        def <strong>probable?</strong>(after key : LinkType) : LinkType?
+
+        <a class="method-permalink" href="#probable%3F%28afterkey%3ALinkType%29%3ALinkType%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns probable transition from the <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> associated with key provided.
+Returns <code>nil</code> if no probable transition is available.</p>
+
+<pre><code>string_array <span class="o">=</span> <span class="s">%w(some say the world will end in fire)</span>
+tt <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">TransitionTable</span>(<span class="t">String</span>).<span class="k">new</span>
+tt.fill table_with: string_array
+
+tt.probable? after: <span class="s">&quot;world&quot;</span> <span class="c">#&#61;&gt; &quot;will&quot;</span>
+tt.probable? after: <span class="s">&quot;fire&quot;</span> <span class="c">#&#61;&gt; nil</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L83" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="random_key:LinkType-instance-method">
+      <div class="signature">
+        
+        def <strong>random_key</strong> : LinkType
+
+        <a class="method-permalink" href="#random_key%3ALinkType-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns random key. 
+Will raise <code>EmptyTransitionTableException</code> if <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code> is empty.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L93" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="random_matrix:Markov::TransitionMatrix&#40;LinkType&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>random_matrix</strong> : <a href="../Markov/TransitionMatrix.html">Markov::TransitionMatrix</a>(LinkType)
+
+        <a class="method-permalink" href="#random_matrix%3AMarkov%3A%3ATransitionMatrix%28LinkType%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns random <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> from table.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L105" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="reset-instance-method">
+      <div class="signature">
+        
+        def <strong>reset</strong>
+
+        <a class="method-permalink" href="#reset-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Resets the <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code>'s last added key between non-sequential sets of training data.</p>
+
+<pre><code>movie_one <span class="o">=</span> <span class="s">%w(the great gatsby)</span>
+movie_two <span class="o">=</span> <span class="s">%w(great expectations)</span>
+tt <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">TransitionTable</span>(<span class="t">String</span>).<span class="k">new</span>
+tt.fill table_with: movie_one
+tt.reset()
+tt.fill table_with: movie_two
+tt.probable? after: <span class="s">&quot;gatsby&quot;</span> <span class="c">#&#61;&gt; nil</span>
+tt.probable? after: <span class="s">&quot;great&quot;</span> <span class="c">#&#61;&gt; &quot;expectations&quot; or &quot;gatsby&quot;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/TransitionTable.cr#L121" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

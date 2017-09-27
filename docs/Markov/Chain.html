@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mccallofthewild/markov">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Markov::Chain(LinkType) - github.com/mccallofthewild/markov</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/mccallofthewild/markov/Markov" data-name="markov">
+      <a href="../Markov.html">Markov</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="github.com/mccallofthewild/markov/Markov/Chain" data-name="markov::chain(linktype)">
+      <a href="../Markov/Chain.html">Chain</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mccallofthewild/markov/Markov/Exceptions" data-name="markov::exceptions">
+      <a href="../Markov/Exceptions.html">Exceptions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/EmptyTransitionMatrixException" data-name="markov::exceptions::emptytransitionmatrixexception">
+      <a href="../Markov/Exceptions/EmptyTransitionMatrixException.html">EmptyTransitionMatrixException</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/EmptyTransitionTableException" data-name="markov::exceptions::emptytransitiontableexception">
+      <a href="../Markov/Exceptions/EmptyTransitionTableException.html">EmptyTransitionTableException</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/Exceptions/InvalidSeedException" data-name="markov::exceptions::invalidseedexception">
+      <a href="../Markov/Exceptions/InvalidSeedException.html">InvalidSeedException</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/TransitionMatrix" data-name="markov::transitionmatrix(linktype)">
+      <a href="../Markov/TransitionMatrix.html">TransitionMatrix</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mccallofthewild/markov/Markov/TransitionTable" data-name="markov::transitiontable(linktype)">
+      <a href="../Markov/TransitionTable.html">TransitionTable</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Markov::Chain(LinkType)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Markov/Chain.html">Markov::Chain(LinkType)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>A <code><a href="../Markov/Chain.html">Chain</a></code> is a vehicle for generating probable sequences of type <code>LinkType</code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L10" target="_blank">markov/Chain.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AJSON%3A%3APullParser%29-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+          <div class="summary"><p>Makes it possible to use <code><a href="../Markov/Chain.html#to_json%28json%3AJSON%3A%3ABuilder%29-instance-method">#to_json</a></code> and <code>#from_json</code> (see Crystal docs)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28transition_table%3AMarkov%3A%3ATransitionTable%28LinkType%29%2Cseed%3ALinkType%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(transition_table : Markov::TransitionTable(LinkType), seed : LinkType? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>For larger processes, you'll want to externally train a <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code> then  pass it in as an argument.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28sample%3AArray%28LinkType%29%2Cseed%3ALinkType%3D%28sample.sample%281%29%29.first%29-class-method" class="signature"><strong>.new</strong>(sample : Array(LinkType), seed : LinkType = (sample.sample(<span class="n">1</span>)).first)</a>
+        
+          <div class="summary"><p>If you have a small (<code>Array</code>-sized) data set, you can pass it as <code>sample</code> and a <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code> will be constructed for you with the sample data.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#generate%28count%3AInt32%29-instance-method" class="signature"><strong>#generate</strong>(count : Int32)</a>
+        
+          <div class="summary"><p>Generates a probable, sequential <code>Array</code> of <code>LinkType</code> elements of <code>count</code> length</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#generated-instance-method" class="signature"><strong>#generated</strong></a>
+        
+          <div class="summary"><p>Returns an ordered <code>Array(LinkType)</code> of all <code>LinkType</code> elements generated</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#generated%3D%28_generated%3AArray%28LinkType%29%29-instance-method" class="signature"><strong>#generated=</strong>(_generated : Array(LinkType))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#next%3ALinkType-instance-method" class="signature"><strong>#next</strong> : LinkType</a>
+        
+          <div class="summary"><p>Generates the next probable <code>LinkType</code> element</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_dead_end%28%26block%3AProc%28Markov%3A%3ATransitionTable%28LinkType%29%2CMarkov%3A%3AChain%28LinkType%29%2CException%2CLinkType%29%29%3AProc%28Markov%3A%3ATransitionTable%28LinkType%29%2CMarkov%3A%3AChain%28LinkType%29%2CException%2CLinkType%29-instance-method" class="signature"><strong>#on_dead_end</strong>(&block : Proc(Markov::TransitionTable(LinkType), Markov::Chain(LinkType), Exception, LinkType)) : Proc(Markov::TransitionTable(LinkType), Markov::Chain(LinkType), Exception, LinkType)</a>
+        
+          <div class="summary"><p>Sets an exception handler for <code>EmptyTransitionMatrixException</code> when <code><a href="../Markov/Chain.html">Chain</a></code> instance reaches a dead end while using <code><a href="../Markov/Chain.html#generate%28count%3AInt32%29-instance-method">Chain#generate</a></code> or <code><a href="../Markov/Chain.html#next%3ALinkType-instance-method">Chain#next</a></code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#seed-instance-method" class="signature"><strong>#seed</strong></a>
+        
+          <div class="summary"><p>Returns <code><a href="../Markov/Chain.html#seed-instance-method">#seed</a></code> element.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#seed%3D%28_seed%3ALinkType%29-instance-method" class="signature"><strong>#seed=</strong>(_seed : LinkType)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_json%28json%3AJSON%3A%3ABuilder%29-instance-method" class="signature"><strong>#to_json</strong>(json : JSON::Builder)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#transition_table-instance-method" class="signature"><strong>#transition_table</strong></a>
+        
+          <div class="summary"><p>Returns the trained instance of <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#transition_table%3D%28_transition_table%3AMarkov%3A%3ATransitionTable%28LinkType%29%29-instance-method" class="signature"><strong>#transition_table=</strong>(_transition_table : Markov::TransitionTable(LinkType))</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new&#40;pull:JSON::PullParser&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new%28pull%3AJSON%3A%3APullParser%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Makes it possible to use <code><a href="../Markov/Chain.html#to_json%28json%3AJSON%3A%3ABuilder%29-instance-method">#to_json</a></code> and <code>#from_json</code> (see Crystal docs)</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L67" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;transition_table:Markov::TransitionTable&#40;LinkType&#41;,seed:LinkType?&#61;nil&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(transition_table : <a href="../Markov/TransitionTable.html">Markov::TransitionTable</a>(LinkType), seed : LinkType? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28transition_table%3AMarkov%3A%3ATransitionTable%28LinkType%29%2Cseed%3ALinkType%3F%3Dnil%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>For larger processes, you'll want to externally train a <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code> then 
+pass it in as an argument.
+If <code><a href="../Markov/Chain.html#seed-instance-method">#seed</a></code> is not provided, it will default to a random item chosen with <code><a href="../Markov/TransitionTable.html#random_key%3ALinkType-instance-method">TransitionTable#random_key</a></code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L48" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;sample:Array&#40;LinkType&#41;,seed:LinkType&#61;&#40;sample.sample&#40;1&#41;&#41;.first&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(sample : Array(LinkType), seed : LinkType = (sample.sample(<span class="n">1</span>)).first)
+
+        <a class="method-permalink" href="#new%28sample%3AArray%28LinkType%29%2Cseed%3ALinkType%3D%28sample.sample%281%29%29.first%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>If you have a small (<code>Array</code>-sized) data set, you can pass it as <code>sample</code>
+and a <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code> will be constructed for you with the sample data. </p>
+
+<p><code><a href="../Markov/Chain.html#seed-instance-method">#seed</a></code> should be the element in <code>sample</code> which you would like to begin the sequence.
+If no <code><a href="../Markov/Chain.html#seed-instance-method">#seed</a></code> is provided, a random element will be selected from <code>sample</code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L88" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="generate&#40;count:Int32&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>generate</strong>(count : Int32)
+
+        <a class="method-permalink" href="#generate%28count%3AInt32%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Generates a probable, sequential <code>Array</code> of <code>LinkType</code> elements of <code>count</code> length</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L118" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="generated-instance-method">
+      <div class="signature">
+        
+        def <strong>generated</strong>
+
+        <a class="method-permalink" href="#generated-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns an ordered <code>Array(LinkType)</code> of all <code>LinkType</code> elements generated</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="generated&#61;&#40;_generated:Array&#40;LinkType&#41;&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>generated=</strong>(_generated : Array(LinkType))
+
+        <a class="method-permalink" href="#generated%3D%28_generated%3AArray%28LinkType%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="next:LinkType-instance-method">
+      <div class="signature">
+        
+        def <strong>next</strong> : LinkType
+
+        <a class="method-permalink" href="#next%3ALinkType-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Generates the next probable <code>LinkType</code> element</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L162" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_dead_end&#40;&amp;block:Proc&#40;Markov::TransitionTable&#40;LinkType&#41;,Markov::Chain&#40;LinkType&#41;,Exception,LinkType&#41;&#41;:Proc&#40;Markov::TransitionTable&#40;LinkType&#41;,Markov::Chain&#40;LinkType&#41;,Exception,LinkType&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>on_dead_end</strong>(&block : Proc(<a href="../Markov/TransitionTable.html">Markov::TransitionTable</a>(LinkType), <a href="../Markov/Chain.html">Markov::Chain</a>(LinkType), Exception, LinkType)) : Proc(<a href="../Markov/TransitionTable.html">Markov::TransitionTable</a>(LinkType), <a href="../Markov/Chain.html">Markov::Chain</a>(LinkType), Exception, LinkType)
+
+        <a class="method-permalink" href="#on_dead_end%28%26block%3AProc%28Markov%3A%3ATransitionTable%28LinkType%29%2CMarkov%3A%3AChain%28LinkType%29%2CException%2CLinkType%29%29%3AProc%28Markov%3A%3ATransitionTable%28LinkType%29%2CMarkov%3A%3AChain%28LinkType%29%2CException%2CLinkType%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets an exception handler for <code>EmptyTransitionMatrixException</code> when <code><a href="../Markov/Chain.html">Chain</a></code> instance reaches a dead end
+while using <code><a href="../Markov/Chain.html#generate%28count%3AInt32%29-instance-method">Chain#generate</a></code> or <code><a href="../Markov/Chain.html#next%3ALinkType-instance-method">Chain#next</a></code>. Returned value is inserted as the next probable element.</p>
+
+<p>Usage:</p>
+
+<pre><code>c <span class="o">=</span> <span class="t">Markov</span><span class="t">::</span><span class="t">Chain</span>(<span class="t">String</span>).<span class="k">new</span> sample: [<span class="s">&quot;Koala&quot;</span>, <span class="s">&quot;Kangaroo&quot;</span>] <span class="k">of</span> <span class="t">String</span>, seed: <span class="s">&quot;Kangaroo&quot;</span>
+c.on_dead_end <span class="k">do</span> <span class="o">|</span>transition_table, chain, exception<span class="o">|</span>
+  <span class="s">&quot;Koala&quot;</span>
+<span class="k">end</span>
+c.<span class="k">next</span>() <span class="c">#&#61;&gt; &quot;Koala&quot;</span>
+c.<span class="k">next</span>() <span class="c">#&#61;&gt; &quot;Kangaroo&quot;</span>
+c.<span class="k">next</span>() <span class="c">#&#61;&gt; &quot;Koala&quot;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L146" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="seed-instance-method">
+      <div class="signature">
+        
+        def <strong>seed</strong>
+
+        <a class="method-permalink" href="#seed-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns <code><a href="../Markov/Chain.html#seed-instance-method">#seed</a></code> element.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L25" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="seed&#61;&#40;_seed:LinkType&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>seed=</strong>(_seed : LinkType)
+
+        <a class="method-permalink" href="#seed%3D%28_seed%3ALinkType%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_json&#40;json:JSON::Builder&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>to_json</strong>(json : JSON::Builder)
+
+        <a class="method-permalink" href="#to_json%28json%3AJSON%3A%3ABuilder%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="transition_table-instance-method">
+      <div class="signature">
+        
+        def <strong>transition_table</strong>
+
+        <a class="method-permalink" href="#transition_table-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the trained instance of <code><a href="../Markov/TransitionTable.html">TransitionTable</a></code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mccallofthewild/markov/blob/890a9a7cfda3f29c80c0a112082a4614ee178c53/src/markov/Chain.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="transition_table&#61;&#40;_transition_table:Markov::TransitionTable&#40;LinkType&#41;&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>transition_table=</strong>(_transition_table : <a href="../Markov/TransitionTable.html">Markov::TransitionTable</a>(LinkType))
+
+        <a class="method-permalink" href="#transition_table%3D%28_transition_table%3AMarkov%3A%3ATransitionTable%28LinkType%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
