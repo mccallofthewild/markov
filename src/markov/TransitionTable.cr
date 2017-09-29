@@ -20,8 +20,6 @@ module Markov
       pull.read_object do |key|
         if pull.kind == :null
           pull.read_next
-        elsif key == "last_added_key"
-          @last_added_key = typeof(key).new(pull)
         else
           hash[key] = TransitionMatrix(typeof(key)).new(pull) # V is the value type, as in `Hash(K, V)`
         end
