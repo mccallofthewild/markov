@@ -21,7 +21,7 @@ module Markov
         if pull.kind == :null
           pull.read_next
         else
-          hash[key] = TransitionMatrix(typeof(key)).new(pull) # V is the value type, as in `Hash(K, V)`
+          hash[key] = TransitionMatrix(LinkType).new(pull)
         end
       end
       hash
