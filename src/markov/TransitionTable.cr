@@ -21,7 +21,9 @@ module Markov
         if pull.kind == :null
           pull.read_next
         else
-          hash[key] = TransitionMatrix(LinkType).new(pull)
+          key = LinkType == String ? %("#{key}") : key # makes String compatible for json parsing
+          key_of_type = LinkType.from_json key
+          hash[key_of_type] = TransitionMatrix(LinkType).new(pull) # V is the value type, as in `Hash(K, V)`
         end
       end
       hash

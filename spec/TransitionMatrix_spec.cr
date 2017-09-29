@@ -7,7 +7,7 @@ describe Markov::TransitionMatrix do
     true.should eq true
   end
 
-  it "#to_json, #from_json" do  
+  it "#to_json, #from_json with String" do  
     t = Markov::TransitionMatrix(String).new
     t.add "I"
     t.add "just"
@@ -16,6 +16,18 @@ describe Markov::TransitionMatrix do
     j_t = t.to_json
     t_j = Markov::TransitionMatrix(String).from_json j_t
     t["I"].should eq t_j["I"]
+  end
+
+  it "#to_json, #from_json with Int32" do  
+    t = Markov::TransitionMatrix(Int32).new
+    t.add 1
+    t.add 2
+    t.add 3
+    t.add 4
+    j_t = t.to_json
+    puts j_t
+    t_j = Markov::TransitionMatrix(Int32).from_json j_t
+    t[2].should eq t_j[2]
   end
 
   it "#add" do

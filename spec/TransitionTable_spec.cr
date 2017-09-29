@@ -63,7 +63,7 @@ describe Markov::TransitionTable do
     is_transition_matrix.should eq(true)
   end
 
-  it "#to_json, #from_json" do 
+  it "#to_json, #from_json with strings" do 
     string_array = %w(some say the world will end in fire)
     normal_init_table = Markov::TransitionTable(String).new
     normal_init_table.fill string_array
@@ -71,6 +71,16 @@ describe Markov::TransitionTable do
     normal_init_table_json = normal_init_table.to_json
     from_json_init_table = Markov::TransitionTable(String).from_json normal_init_table_json
     from_json_init_table["some"].should eq normal_init_table["some"]
+  end
+
+  it "#to_json, #from_json with integers" do 
+    int_array = [0,1,2,3,4,5]
+    normal_init_table = Markov::TransitionTable(Int32).new
+    normal_init_table.fill int_array
+
+    normal_init_table_json = normal_init_table.to_json
+    from_json_init_table = Markov::TransitionTable(Int32).from_json normal_init_table_json
+    from_json_init_table[1].should eq normal_init_table[1]
   end
 
   it "#reset" do   
