@@ -4,7 +4,7 @@ name: markov
 description: |
   ⛓ Build Markov Chains and run Markov Processes with Crystal!
 
-version: 0.1.0
+version: 0.1.1
 
 authors:
   - McCall Alexander <mccallalexander96@gmail.com>
