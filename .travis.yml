@@ -1,4 +1,7 @@
 language: crystal
+script:
+  - crystal spec
+  - crystal docs
 deploy:
   provider: pages
   skip_cleanup: true
