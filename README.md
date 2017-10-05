@@ -2,6 +2,8 @@
 
 A Crystal library for building Markov Chains and running Markov Processes.
 
+[![Build Status](https://travis-ci.org/mccallofthewild/markov.svg?branch=master)](https://travis-ci.org/mccallofthewild/markov) [![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://mccallofthewild.github.io/markov/) [![GitHub release](https://img.shields.io/github/release/mccallofthewild/markov.svg)](https://github.com/mccallofthewild/markov/releases)
+
 ### _What is a Markov Chain?_
 
 A Markov Chain is essentially a mechanism for guessing probable future events based on a sample of past events.
