@@ -25,20 +25,16 @@ module Markov
     getter :seed
 
     @generated : Array(LinkType) = Array(LinkType).new
-
-    @default_dead_end_handler : Proc(
-      TransitionTable(LinkType), 
-      Chain(LinkType), 
-      Exception,
-      LinkType
-    ) = create_default_proc()
+    
+    @custom_dead_end_handler = false
 
     @dead_end_handler : Proc(
       TransitionTable(LinkType), 
       Chain(LinkType), 
       Exception,
       LinkType
-    ) = @default_dead_end_handler
+    )
+
 
     @seed : LinkType
 
@@ -61,12 +57,14 @@ module Markov
         @seed = @transition_table.random_key
       end
       validate_seed seed: @seed, rule: "`seed` must be an existing key in provided `transition_table`!"
+      @dead_end_handler = default_dead_end_handler
     end
 
     # Makes it possible to use `#to_json` and `#from_json` (see Crystal docs)
     def initialize(pull : JSON::PullParser)
       @transition_table = TransitionTable(LinkType).new
       @seed = @transition_table.first_key
+      @dead_end_handler = default_dead_end_handler
 
       hash = self
       pull.read_object do |key|
@@ -92,6 +90,7 @@ module Markov
       @transition_table = TransitionTable(LinkType).new
       @transition_table.fill sample
       validate_seed seed: @seed, rule: "`seed` must be an existing item in `sample`!"
+      @dead_end_handler = default_dead_end_handler
     end
 
     # Validates provided `seed` for initializers
@@ -105,8 +104,8 @@ module Markov
     end
 
     # Creates a default `Proc` for dead end `Exception` handlers.
-    private def create_default_proc
-      return Proc(
+    private def default_dead_end_handler
+      Proc(
         TransitionTable(LinkType), 
         Chain(LinkType), 
         Exception,
@@ -155,6 +154,7 @@ module Markov
       LinkType
     )
       @dead_end_handler = block
+      @custom_dead_end_handler = true
       block
     end
 
@@ -164,7 +164,7 @@ module Markov
       begin
         seed = @transition_table.probable after: @seed
       rescue ex : Markov::Exceptions::EmptyTransitionMatrixException
-        if @dead_end_handler != @default_dead_end_handler
+        if @custom_dead_end_handler
           seed = @dead_end_handler.call(@transition_table, self, ex)
         else
           raise ex
