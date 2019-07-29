@@ -1,13 +1,12 @@
 require "./spec_helper"
 
 describe Markov::TransitionMatrix do
-
-  it "#initialize" do  
+  it "#initialize" do
     t = Markov::TransitionMatrix(Range(Int32, Int32)).new
     true.should eq true
   end
 
-  it "#to_json, #from_json with String" do  
+  it "#to_json, #from_json with String" do
     t = Markov::TransitionMatrix(String).new
     t.add "I"
     t.add "just"
@@ -18,7 +17,7 @@ describe Markov::TransitionMatrix do
     t["I"].should eq t_j["I"]
   end
 
-  it "#to_json, #from_json with Int32" do  
+  it "#to_json, #from_json with Int32" do
     t = Markov::TransitionMatrix(Int32).new
     t.add 1
     t.add 2
@@ -35,7 +34,7 @@ describe Markov::TransitionMatrix do
     t.add "hey"
     t["hey"].should eq 1
   end
-  
+
   it "#probabilities" do
     t = Markov::TransitionMatrix(String).new
     t.add "hello"
@@ -55,17 +54,16 @@ describe Markov::TransitionMatrix do
     t.sum.should eq(3)
   end
 
-  it "#probable_transition" do 
-    
-    it "returns TransitionMatrix when not empty" do  
+  describe "#probable_transition" do
+    it "returns TransitionMatrix when not empty" do
       t = Markov::TransitionMatrix(String).new
       t.add "hello"
       t.add "hello"
       t.add "welcome"
-  
+
       hello_occurrences = 0
       welcome_occurrences = 0
-  
+
       iterations = 0
       while iterations < 100
         transition = t.probable_transition
@@ -76,26 +74,23 @@ describe Markov::TransitionMatrix do
           welcome_occurrences = welcome_occurrences + 1
         end
         iterations = iterations + 1
-      end 
-  
+      end
+
       # yes, it's POSSIBLE that every transition is one or the other, but
-      # probability would suggest that `hello_occurrences` are twice as 
+      # probability would suggest that `hello_occurrences` are twice as
       # prevalent as `welcome_occurrences`, though random selection makes
       # this unpredictable, so we just test for `hello_occurrences` to be greater
-  
+
       (hello_occurrences > welcome_occurrences).should eq(true)
     end
 
-    it "throws `Markov::Exceptions::EmptyTransitionMatrixException` when empty" do  
+    it "throws `Markov::Exceptions::EmptyTransitionMatrixException` when empty" do
       t = Markov::TransitionMatrix(String).new
       begin
         transition = t.probable_transition
       rescue Markov::Exceptions::EmptyTransitionMatrixException
         true.should eq(true)
       end
-
     end
-
   end
-  
 end
