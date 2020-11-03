@@ -1,4 +1,4 @@
-require "./TransitionMatrix.cr"
+require "./transition_matrix"
 
 module Markov
   # A `TransitionTable` represents a mapping of keys to `TransitionMatrix`'s.

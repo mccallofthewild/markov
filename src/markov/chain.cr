@@ -1,5 +1,5 @@
 require "json"
-require "./TransitionTable.cr"
+require "./transition_table"
 
 # Module `Markov` contains the means for creating Markov Chains and executing Markov Processes.
 module Markov
