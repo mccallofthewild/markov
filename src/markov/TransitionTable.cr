@@ -1,15 +1,12 @@
 require "./TransitionMatrix.cr"
 
 module Markov
-  
   # A `TransitionTable` represents a mapping of keys to `TransitionMatrix`'s.
   class TransitionTable(LinkType) < Hash(LinkType, TransitionMatrix(LinkType))
-    
-
     @last_added_key : LinkType | Nil
 
     # Creates a new empty `TransitionMatrix`.
-    def initialize 
+    def initialize
       super
     end
 
@@ -29,20 +26,19 @@ module Markov
       hash
     end
 
-    
-    # Inserts `key` into last added `key`'s `TransitionMatrix`, if applicable, 
+    # Inserts `key` into last added `key`'s `TransitionMatrix`, if applicable,
     # and creates new `TransitionMatrix` for `key` if not already there.
     def add(key : LinkType)
       if @last_added_key
         last_matrix = self[@last_added_key]
         last_matrix.add(key)
       end
-      if ! self.has_key? key
+      if !self.has_key? key
         self[key] = TransitionMatrix(LinkType).new
       end
       @last_added_key = key
     end
-    
+
     # Sequentially fills `TransitionTable` with values in given `Array` using `#add` method.
     # Just a shortcut for looping through array and `#add`ing elements.
     # ```
@@ -50,12 +46,12 @@ module Markov
     # tt = Markov::TransitionTable(String).new
     # tt.fill table_with: string_array
     # ```
-    def fill( table_with sample : Array(LinkType) )
+    def fill(table_with sample : Array(LinkType))
       sample.each do |key|
         add(key)
       end
     end
-    
+
     # Returns probable transition from the `TransitionMatrix` associated with key provided.
     # Will raise `EmptyTransitionMatrixException` if no probable transition is available.
     # ```
@@ -63,10 +59,10 @@ module Markov
     # tt = Markov::TransitionTable(String).new
     # tt.fill table_with: string_array
     #
-    # tt.probable? after: "world" #=> "will"
-    # tt.probable? after: "fire" # raises `EmptyTransitionMatrixException`
+    # tt.probable? after: "world" # => "will"
+    # tt.probable? after: "fire"  # raises `EmptyTransitionMatrixException`
     # ```
-    def probable( after key : LinkType ) : LinkType
+    def probable(after key : LinkType) : LinkType
       self[key].probable_transition
     end
 
@@ -77,10 +73,10 @@ module Markov
     # tt = Markov::TransitionTable(String).new
     # tt.fill table_with: string_array
     #
-    # tt.probable? after: "world" #=> "will"
-    # tt.probable? after: "fire" #=> nil
+    # tt.probable? after: "world" # => "will"
+    # tt.probable? after: "fire"  # => nil
     # ```
-    def probable?( after key : LinkType ) : LinkType | Nil
+    def probable?(after key : LinkType) : LinkType | Nil
       begin
         return probable key
       rescue Markov::Exceptions::EmptyTransitionMatrixException
@@ -88,14 +84,14 @@ module Markov
       end
     end
 
-    # Returns random key. 
+    # Returns random key.
     # Will raise `EmptyTransitionTableException` if `TransitionTable` is empty.
     def random_key : LinkType
-      begin 
+      begin
         self.keys.sample(1).first
       rescue IndexError
         raise Exceptions::EmptyTransitionTableException.new(
-          method: "random_key", 
+          method: "random_key",
           message: "Use TransitionTable#add or TransitionTable#fill to populate the TransitionTable instance and try again."
         )
       end
@@ -114,15 +110,12 @@ module Markov
     # tt.fill table_with: movie_one
     # tt.reset()
     # tt.fill table_with: movie_two
-    
+
     # tt.probable? after: "gatsby" #=> nil
     # tt.probable? after: "great" #=> "expectations" or "gatsby"
     # ```
     def reset
       @last_added_key = nil
     end
-    
-
   end
-  
 end

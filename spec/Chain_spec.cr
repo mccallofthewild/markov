@@ -1,17 +1,15 @@
 require "./spec_helper"
 
 describe Markov::Chain do
-  
   describe "new" do
-
     it "initializes with `sample` and `@seed`" do
       c = Markov::Chain(String).new sample: ["Koala", "Kangaroo"] of String, seed: "Koala"
-      typeof( c ).should eq(Markov::Chain(String))
+      typeof(c).should eq(Markov::Chain(String))
     end
-  
+
     it "initializes with `sample` and no `@seed`" do
       c = Markov::Chain(String).new sample: ["Hippo", "Giraffe"]
-      typeof( c ).should eq(Markov::Chain(String))    
+      typeof(c).should eq(Markov::Chain(String))
     end
 
     it "raises `InvalidSeedException` with `sample` and invalid `seed`" do
@@ -48,13 +46,10 @@ describe Markov::Chain do
       end
       ex_raised.should eq true
     end
-
   end
 
   describe "getters" do
-
     describe "#generated" do
-
       it "raises `EmptyTransitionMatrixException` when seed has nothing to transition to" do
         begin
           c = Markov::Chain(String).new sample: ["Hippo", "Giraffe"], seed: "Giraffe"
@@ -62,19 +57,17 @@ describe Markov::Chain do
           (true).should eq(true)
         end
       end
-
     end
 
-    it "#transition_table" do 
-      c = Markov::Chain(String).new sample: ["Hippo", "Giraffe"]    
-      typeof( c.transition_table ).should eq( Markov::TransitionTable(String) )
+    it "#transition_table" do
+      c = Markov::Chain(String).new sample: ["Hippo", "Giraffe"]
+      typeof(c.transition_table).should eq(Markov::TransitionTable(String))
     end
-
   end
 
-  it "#next" do  
+  it "#next" do
     c = Markov::Chain(String).new sample: ["Koala", "Kangaroo"] of String, seed: "Koala"
-    c.next().should eq "Kangaroo"
+    c.next.should eq "Kangaroo"
   end
 
   it "#on_dead_end" do
@@ -82,9 +75,8 @@ describe Markov::Chain do
     c.on_dead_end do |transition_table, chain, exception|
       "Koala"
     end
-    c.next().should eq("Koala")
-    c.next().should eq("Kangaroo")
-    c.next().should eq("Koala")    
+    c.next.should eq("Koala")
+    c.next.should eq("Kangaroo")
+    c.next.should eq("Koala")
   end
-  
 end

@@ -1,6 +1,5 @@
 # Holds all custom exceptions in the `Markov` module.
 module Markov::Exceptions
-
   # Thrown when a method cannot execute due to a `TransitionMatrix` being empty.
   class EmptyTransitionMatrixException < Exception
     def initialize(method : String, message : String = "")
@@ -21,5 +20,4 @@ module Markov::Exceptions
       super "`seed` not valid! \n \t #{message}"
     end
   end
-
 end
