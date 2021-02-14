@@ -1,12 +1,10 @@
 require "json"
 
 module Markov
-    
   # A `TransitionMatrix` is an object for storing and selecting transitions in a `Markov::Chain`.
   #
   # See [https://en.wikipedia.org/wiki/Stochastic_matrix](https://en.wikipedia.org/wiki/Stochastic_matrix)
   class TransitionMatrix(LinkType) < Hash(LinkType, Int32)
-
     # { ELEMENT => OCCURRENCE_COUNT }
 
     # Creates a new empty `TransitionMatrix`.
@@ -63,7 +61,6 @@ module Markov
     # Chooses a random, probable transition from the transitions in the matrix.
     # If matrix is empty, will throw `Markov::Exceptions::EmptyTransitionMatrixException`
     def probable_transition : LinkType
-
       if self.size == 0
         raise Markov::Exceptions::EmptyTransitionMatrixException.new(
           method: "probable_transition",
@@ -71,13 +68,13 @@ module Markov
         )
       end
       probable = nil
-      
+
       success_params = {} of LinkType => Range(Int32, Int32)
       low : Int32 = 0
       high : Int32 = 0
 
       initial_low = low
-      
+
       self.each do |key, count|
         low = high
         high = low + count
@@ -86,7 +83,7 @@ module Markov
       end
 
       final_high = high
-      
+
       exclusive_capturing_range = initial_low...final_high
       random_selection : Int32 = Random.rand(exclusive_capturing_range)
 
@@ -96,7 +93,7 @@ module Markov
         end
       end
 
-      if ! probable
+      if !probable
         raise Markov::Exceptions::EmptyTransitionMatrixException.new(
           method: "probable_transition",
           message: "Transition not found!"
@@ -105,7 +102,5 @@ module Markov
         return probable
       end
     end
-
   end
-  
 end

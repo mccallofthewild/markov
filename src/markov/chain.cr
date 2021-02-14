@@ -1,44 +1,30 @@
 require "json"
-require "./TransitionTable.cr"
-
+require "./transition_table"
 
 # Module `Markov` contains the means for creating Markov Chains and executing Markov Processes.
 module Markov
-
-  
   # A `Chain` is a vehicle for generating probable sequences of type `LinkType`
   class Chain(LinkType)
+    include JSON::Serializable
 
-    JSON.mapping(
-      generated: Array(LinkType),
-      transition_table: TransitionTable(LinkType),
-      seed: LinkType
-    )
-    
     # Returns an ordered `Array(LinkType)` of all `LinkType` elements generated
-    getter :generated
-    
+    getter generated : Array(LinkType)
+
     # Returns the trained instance of `TransitionTable`
-    getter :transition_table
+    getter transition_table : TransitionTable(LinkType)
 
     # Returns `seed` element.
-    getter :seed
+    getter seed : LinkType
 
     @generated : Array(LinkType) = Array(LinkType).new
-    
+
     @custom_dead_end_handler = false
 
-    @dead_end_handler : Proc(
-      TransitionTable(LinkType), 
-      Chain(LinkType), 
-      Exception,
-      LinkType
-    )
-
+    @dead_end_handler : Proc(TransitionTable(LinkType), Chain(LinkType), Exception, LinkType)
 
     @seed : LinkType
 
-    # For larger processes, you'll want to externally train a `TransitionTable` then 
+    # For larger processes, you'll want to externally train a `TransitionTable` then
     # pass it in as an argument.
     # If `seed` is not provided, it will default to a random item chosen with `TransitionTable#random_key`
     def initialize(
@@ -47,11 +33,11 @@ module Markov
     )
       if @transition_table.empty?
         raise Markov::Exceptions::EmptyTransitionTableException.new(
-          method: "#new", 
+          method: "#new",
           message: "Add elements to your `TransitionTable` or try another constructor"
         )
       end
-      if seed 
+      if seed
         @seed = seed
       else
         @seed = @transition_table.random_key
@@ -77,9 +63,9 @@ module Markov
       hash
     end
 
-    # 
+    #
     # If you have a small (`Array`-sized) data set, you can pass it as `sample`
-    # and a `TransitionTable` will be constructed for you with the sample data. 
+    # and a `TransitionTable` will be constructed for you with the sample data.
     #
     # `seed` should be the element in `sample` which you would like to begin the sequence.
     # If no `seed` is provided, a random element will be selected from `sample`.
@@ -105,23 +91,18 @@ module Markov
 
     # Creates a default `Proc` for dead end `Exception` handlers.
     private def default_dead_end_handler
-      Proc(
-        TransitionTable(LinkType), 
-        Chain(LinkType), 
-        Exception,
-        LinkType
-      ).new { |_| return @transition_table.first_key}
+      Proc(TransitionTable(LinkType), Chain(LinkType), Exception, LinkType).new { |_| return @transition_table.first_key }
     end
 
     # Generates a probable, sequential `Array` of `LinkType` elements of `count` length
     def generate(count : Int32)
       i = 0
-      temp_generated = [] of LinkType 
+      temp_generated = [] of LinkType
 
-      while i<count
+      while i < count
         el = self.next
         temp_generated.push(el)
-        i = i+1
+        i = i + 1
       end
       @generated.concat(temp_generated)
 
@@ -130,29 +111,19 @@ module Markov
 
     # Sets an exception handler for `EmptyTransitionMatrixException` when `Chain` instance reaches a dead end
     # while using `Chain#generate` or `Chain#next`. Returned value is inserted as the next probable element.
-    # 
+    #
     # Usage:
-    # 
+    #
     # ```
     # c = Markov::Chain(String).new sample: ["Koala", "Kangaroo"] of String, seed: "Kangaroo"
     # c.on_dead_end do |transition_table, chain, exception|
     #   "Koala"
     # end
-    # c.next() #=> "Koala"
-    # c.next() #=> "Kangaroo"
-    # c.next() #=> "Koala"
+    # c.next # => "Koala"
+    # c.next # => "Kangaroo"
+    # c.next # => "Koala"
     # ```
-    def on_dead_end( &block : Proc(
-      TransitionTable(LinkType), 
-      Chain(LinkType), 
-      Exception,
-      LinkType
-    ) ) : Proc(
-      TransitionTable(LinkType), 
-      Chain(LinkType), 
-      Exception,
-      LinkType
-    )
+    def on_dead_end(&block : Proc(TransitionTable(LinkType), Chain(LinkType), Exception, LinkType)) : Proc(TransitionTable(LinkType), Chain(LinkType), Exception, LinkType)
       @dead_end_handler = block
       @custom_dead_end_handler = true
       block
@@ -175,6 +146,5 @@ module Markov
       @generated.push(@seed)
       @seed
     end
-
   end
 end
