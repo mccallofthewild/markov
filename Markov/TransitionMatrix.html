@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.35.1">
+<meta name="crystal_docs.project_version" content="HEAD-dev">
+<meta name="crystal_docs.project_name" content="markov">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="markov">
+  <title>Markov::TransitionMatrix(LinkType) - markov HEAD-dev</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          markov
+        </a>
+      </h1>
+
+      <span class="project-version">
+        HEAD-dev
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="markov/Markov" data-name="markov">
+      <a href="../Markov.html">Markov</a>
+      
+        <ul>
+  
+  <li class=" " data-id="markov/Markov/Chain" data-name="markov::chain(linktype)">
+      <a href="../Markov/Chain.html">Chain</a>
+      
+    </li>
+  
+  <li class="parent " data-id="markov/Markov/Exceptions" data-name="markov::exceptions">
+      <a href="../Markov/Exceptions.html">Exceptions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="markov/Markov/Exceptions/EmptyTransitionMatrixException" data-name="markov::exceptions::emptytransitionmatrixexception">
+      <a href="../Markov/Exceptions/EmptyTransitionMatrixException.html">EmptyTransitionMatrixException</a>
+      
+    </li>
+  
+  <li class=" " data-id="markov/Markov/Exceptions/EmptyTransitionTableException" data-name="markov::exceptions::emptytransitiontableexception">
+      <a href="../Markov/Exceptions/EmptyTransitionTableException.html">EmptyTransitionTableException</a>
+      
+    </li>
+  
+  <li class=" " data-id="markov/Markov/Exceptions/InvalidSeedException" data-name="markov::exceptions::invalidseedexception">
+      <a href="../Markov/Exceptions/InvalidSeedException.html">InvalidSeedException</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" current" data-id="markov/Markov/TransitionMatrix" data-name="markov::transitionmatrix(linktype)">
+      <a href="../Markov/TransitionMatrix.html">TransitionMatrix</a>
+      
+    </li>
+  
+  <li class=" " data-id="markov/Markov/TransitionTable" data-name="markov::transitiontable(linktype)">
+      <a href="../Markov/TransitionTable.html">TransitionTable</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Markov::TransitionMatrix(LinkType)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Markov/TransitionMatrix.html">Markov::TransitionMatrix(LinkType)</a></li><li class="superclass">Hash(LinkType, Int32)</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>A <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code> is an object for storing and selecting transitions in a <code><a href="../Markov/Chain.html">Markov::Chain</a></code>.</p>
+
+<p>See <a href="https://en.wikipedia.org/wiki/Stochastic_matrix">https://en.wikipedia.org/wiki/Stochastic_matrix</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(pull:JSON::PullParser)-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+          <div class="summary"><p>Makes it possible to use <code>#to_json</code> and <code>#from_json</code> (see Crystal docs)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+          <div class="summary"><p>Creates a new empty <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#add(link:LinkType)-instance-method" class="signature"><strong>#add</strong>(link : LinkType)</a>
+        
+          <div class="summary"><p>Adds item to <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#probabilities:Hash(LinkType,Float32)-instance-method" class="signature"><strong>#probabilities</strong> : Hash(LinkType, Float32)</a>
+        
+          <div class="summary"><p>Returns decimal probability of each transition in the matrix</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#probable_transition:LinkType-instance-method" class="signature"><strong>#probable_transition</strong> : LinkType</a>
+        
+          <div class="summary"><p>Chooses a random, probable transition from the transitions in the matrix.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#sum:Int32-instance-method" class="signature"><strong>#sum</strong> : Int32</a>
+        
+          <div class="summary"><p>Returns sum of all values (occurrences) in the matrix</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new(pull:JSON::PullParser)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Makes it possible to use <code>#to_json</code> and <code>#from_json</code> (see Crystal docs)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Creates a new empty <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="add(link:LinkType)-instance-method">
+      <div class="signature">
+        
+        def <strong>add</strong>(link : LinkType)
+
+        <a class="method-permalink" href="#add(link:LinkType)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Adds item to <code><a href="../Markov/TransitionMatrix.html">TransitionMatrix</a></code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="probabilities:Hash(LinkType,Float32)-instance-method">
+      <div class="signature">
+        
+        def <strong>probabilities</strong> : Hash(LinkType, Float32)
+
+        <a class="method-permalink" href="#probabilities:Hash(LinkType,Float32)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns decimal probability of each transition in the matrix</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="probable_transition:LinkType-instance-method">
+      <div class="signature">
+        
+        def <strong>probable_transition</strong> : LinkType
+
+        <a class="method-permalink" href="#probable_transition:LinkType-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Chooses a random, probable transition from the transitions in the matrix.
+If matrix is empty, will throw <code><a href="../Markov/Exceptions/EmptyTransitionMatrixException.html">Markov::Exceptions::EmptyTransitionMatrixException</a></code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="sum:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>sum</strong> : Int32
+
+        <a class="method-permalink" href="#sum:Int32-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns sum of all values (occurrences) in the matrix</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
